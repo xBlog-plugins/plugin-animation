@@ -53,5 +53,5 @@
     </div>
 </div>
 <script>
-new Vue({el:'#app',delimiters:['${','}'],data:{animations:{contents:[],num:0},net:{}},mounted(){this.net=new Net("http://127.0.0.1:2333/api/v3/")this.getAnimation(1)let win=new WindowTool()win.onScroll(()=>this.animations.current>this.animations.total?this.$message.warning("已经到达底部~"):this.getAnimation(this.animations.current+1))},methods:{getAnimation(page){this.net.request("plugins/animations","GET",{page}).then((data)=>{this.animations.num=data.num this.animations.total=data.total this.animations.current=data.current this.animations.contents.push.apply(this.animations.contents,data.contents)})}}});
+    new Vue({el:'#app',delimiters:['${','}'],data:{animations:{contents:[],num:0}},mounted(){xy.net.server="/api/v3/";this.getAnimation(1);xy.window.onScroll(()=>this.animations.current>this.animations.total?this.$message.warning("已经到达底部~"):this.getAnimation(this.animations.current+1))},methods:{getAnimation(page){xy.net.request("plugins/animations","GET",{page}).then((data)=>{this.animations.num=data.num;this.animations.total=data.total;this.animations.current=data.current;this.animations.contents.push.apply(this.animations.contents,data.contents)})}}});
 </script>

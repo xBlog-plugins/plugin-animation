@@ -9,6 +9,7 @@ const widget =xBlog.widget
 const keyUID = 'bili_uid'
 // B站cookie
 const keyCookie = 'bili_cookie'
+const keyBackground = 'animation_img'
 
 // 获取动画数据
 function getAnimation(id,okHandle,errHandle){
@@ -89,19 +90,18 @@ router.registerRouter("GET","",function(context){
 
 // 注册追番页面
 widget.addPage({
-    background:"",
+    background: tools.getSetting(keyBackground),
     file:"index.html",
     headMeta: {
         title: "我的追番",
     },
     css: ["element"],
-    script: ["vue","jquery","element","xiaoyou"],
+    script: ["vue","jquery","element"],
     url: "",
     full: false,
     side: false
 },function (){
-    let a = {}
-    return a
+    return {}
 })
 
 // 注册追番设置

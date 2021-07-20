@@ -105,7 +105,7 @@ widget.addPage({
 })
 
 // 注册追番设置
-widget.addSetting("追番设置",1,tools.getAdminPluginSetting([
+widget.addSetting("追番设置",1,[
     {title:"B站uid",type: "input",key: keyUID},
     {title:"B站cookie",type: "text",key: keyCookie}
-]))
+])

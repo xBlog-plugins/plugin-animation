@@ -11,6 +11,40 @@ const keyUID = 'bili_uid'
 const keyCookie = 'bili_cookie'
 const keyBackground = 'animation_img'
 
+// 注册路由，当获取追番信息时调用此接口
+router.registerRouter("GET","",function(context){
+    // 用户Bid
+    let id = context.Query("page")
+    if (id==="") id=1
+    getAnimation(id, function (data){
+        router.response.ResponseOk(context,data)
+    },function (msg){
+        router.response.ResponseServerError(context,msg)
+    })
+})
+
+// 注册追番页面
+widget.addPage({
+    background: tools.getSetting(keyBackground),
+    file:"index.html",
+    headMeta: {
+        title: "我的追番",
+    },
+    css: ["element"],
+    script: ["vue","jquery","element"],
+    url: "",
+    full: false,
+    side: false
+},function (){
+    return {}
+})
+
+// 注册追番设置
+widget.addSetting("追番设置",1,[
+    {title:"B站uid",type: "input",key: keyUID},
+    {title:"B站cookie",type: "text",key: keyCookie}
+])
+
 // 获取动画数据
 function getAnimation(id,okHandle,errHandle){
     // 获取B站UID
@@ -75,37 +109,3 @@ function getAnimation(id,okHandle,errHandle){
         }
     })
 }
-
-// 注册路由，当获取追番信息时调用此接口
-router.registerRouter("GET","",function(context){
-    // 用户Bid
-    let id = context.Query("page")
-    if (id==="") id=1
-    getAnimation(id, function (data){
-        router.response.ResponseOk(context,data)
-    },function (msg){
-        router.response.ResponseServerError(context,msg)
-    })
-})
-
-// 注册追番页面
-widget.addPage({
-    background: tools.getSetting(keyBackground),
-    file:"index.html",
-    headMeta: {
-        title: "我的追番",
-    },
-    css: ["element"],
-    script: ["vue","jquery","element"],
-    url: "",
-    full: false,
-    side: false
-},function (){
-    return {}
-})
-
-// 注册追番设置
-widget.addSetting("追番设置",1,[
-    {title:"B站uid",type: "input",key: keyUID},
-    {title:"B站cookie",type: "text",key: keyCookie}
-])
